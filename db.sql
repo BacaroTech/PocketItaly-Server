@@ -1,5 +1,5 @@
 
-CREATE DATABASE IF NOT EXISTS pocket_italy;
+--CREATE DATABASE pocket_italy;
 -- Create roles table with all necessary columns
 CREATE TABLE IF NOT EXISTS roles 
 (
