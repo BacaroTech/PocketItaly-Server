@@ -1,25 +1,24 @@
-import {
-  Exclude,
-  Expose,
-} from 'class-transformer';
+import { Exclude } from "class-transformer";
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
-} from 'typeorm';
+} from "typeorm";
 
-import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
-import { HashService } from '@base/infrastructure/services/hash/HashService';
+import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
+import { HashService } from "@base/infrastructure/services/hash/HashService";
 
-import { Role } from './Role';
+import { Role } from "./Role";
+import { Xtoken } from "../Xtokens/Xtoken";
 
-@Entity({ name: 'users' })
+@Entity({ name: "users" })
 export class User extends EntityBase {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn("increment")
   id: number;
 
   @Column({ name: "email" })
@@ -39,13 +38,14 @@ export class User extends EntityBase {
   roleId: number;
 
   @OneToOne(() => Role)
-  @JoinColumn({ name: 'role_id' })
+  @JoinColumn({ name: "role_id" })
   role: Role;
 
   @BeforeInsert()
   @BeforeUpdate()
   async setPassword() {
-    if (this.password) this.password = await new HashService().make(this.password);
+    if (this.password)
+      this.password = await new HashService().make(this.password);
   }
 
   @BeforeInsert()
@@ -57,6 +57,9 @@ export class User extends EntityBase {
 
   // @OneToMany(() => Orders, order => order.user)
   // orders: Orders[];
+
+  @OneToMany(() => Xtoken, (xtoken) => xtoken.user)
+  xtokens: Xtoken[];
 
   // @ManyToOne(() => Role, role => role.users)
   // @JoinColumn({ name: 'role_id', referencedColumnName: 'id' })
