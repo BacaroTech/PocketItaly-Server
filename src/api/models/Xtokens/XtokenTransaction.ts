@@ -4,10 +4,12 @@ import {
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from "typeorm";
 import { Xtoken } from "./Xtoken";
 import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
 import { User } from "../Users/User";
+import { XtokenTransactionStatus } from "./XtokenTransactionStatus";
 
 @Entity("xtoken_transactions")
 export class XtokenTransaction extends EntityBase {
@@ -23,6 +25,16 @@ export class XtokenTransaction extends EntityBase {
   @CreateDateColumn({ nullable: true, name: "created_at" })
   createdAt: Date;
 
+  @Column({
+    type: "double precision",
+  })
+  latitude: number;
+
+  @Column({
+    type: "double precision",
+  })
+  longitude: number;
+
   @ManyToOne(() => Xtoken)
   @JoinColumn({ name: "xtoken_id" })
   xtoken: Xtoken;
@@ -34,4 +46,7 @@ export class XtokenTransaction extends EntityBase {
   @ManyToOne(() => User)
   @JoinColumn({ name: "to_user" })
   toUser: User;
+
+  @OneToMany(() => XtokenTransactionStatus,xTokenTransactionStatus=> xTokenTransactionStatus.transaction)
+  statuses: XtokenTransactionStatus[];
 }
