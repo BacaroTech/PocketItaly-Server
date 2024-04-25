@@ -12,16 +12,24 @@ export class ProductService{
         return await this.productRepository.insertProduct(product)
     }
 
-    public async updateproduct(product: Product){
+    public async updateProduct(product: Product){
         return await this.productRepository.updateProduct(product.id, product)
     }
 
-    public async deleteproduct(id: number){
+    public async deleteProduct(id: number){
         return await this.productRepository.deleteProduct(id)
     }
 
     public async findOneProductById(id: number){
-        return await this.productRepository.findById(id)
+        return await this.productRepository.findOneProduct(id)
+    }
+
+    public async findAll(){
+        return await this.productRepository.findAll()
+    }
+
+    public async insertManyProducts(products: Product[]){
+        return await this.productRepository.insertManyProducts(products)
     }
 
 

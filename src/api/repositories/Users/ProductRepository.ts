@@ -21,10 +21,16 @@ export class ProductRepository extends RepositoryBase<Product>{
         return await this.delete(id);
     }
 
-    public async findById(id: number) {
-        return await this.repository.findOneBy({
-            id: id
-        })
+    public async findOneProduct(id: number) {
+        return await this.findById(id)
+    }
+
+    public async findAllProducts(){
+        return await this.findAll()
+    }
+
+    public async insertManyProducts(products: Product[]){
+        return await this.repository.insert(products)
     }
 
 }

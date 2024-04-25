@@ -1,4 +1,4 @@
-import { DeepPartial, FindOptionsWhere, Repository } from 'typeorm';
+import { DeepPartial, DeleteResult, FindOptionsWhere, Repository, UpdateResult } from 'typeorm';
 
 import { EntityBase } from "./EntityBase";
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
@@ -20,12 +20,11 @@ export abstract class RepositoryBase<T extends EntityBase> {
     return this.repository.save(entity);
   }
 
-  public async update(id: number, data: QueryDeepPartialEntity<T>): Promise<T | null> {
-     this.repository.update({ id } as FindOptionsWhere<T>, data);
-    return this.findById(id);
+  public async update(id: number, data: QueryDeepPartialEntity<T>): Promise<UpdateResult> {
+    return this.repository.update({ id } as FindOptionsWhere<T>, data);
   }
 
-  public async delete(id: number): Promise<void> {
-    this.repository.delete({ id } as FindOptionsWhere<T>);
+  public async delete(id: number): Promise<DeleteResult> {
+    return this.repository.delete({ id } as FindOptionsWhere<T>);
   }
 }
