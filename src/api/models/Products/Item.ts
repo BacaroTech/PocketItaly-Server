@@ -12,7 +12,7 @@ export class Item extends EntityBase{
     @Column({name: 'product_id'})
     productId: number
 
-    @ManyToOne(() => Product)
+    @ManyToOne(() => Product, { onDelete: 'CASCADE' })
     @JoinColumn({name: 'product_id'})
     product: Product
 
