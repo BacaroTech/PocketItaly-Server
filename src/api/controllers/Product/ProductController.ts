@@ -1,12 +1,12 @@
 import { Product } from "@base/api/models/Products/Product";
-import { ProductService } from "@base/api/services/Auth/ProductService";
+import { ProductService } from "@base/api/services/Product/ProductService";
 import { Body, Delete, Get, JsonController, Param, Post, Put } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { Inject, Service } from "typedi";
 
 @Service()
 @OpenAPI({
-  tags: ['Auth'],
+  tags: ['Product'],
 })
 @JsonController('/product')
 export class ProductController {

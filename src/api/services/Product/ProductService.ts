@@ -1,5 +1,5 @@
 import { Product } from "@base/api/models/Products/Product";
-import { ProductRepository } from "@base/api/repositories/Users/ProductRepository";
+import { ProductRepository } from "@base/api/repositories/Products/ProductRepository";
 import { Inject, Service } from "typedi";
 
 @Service()

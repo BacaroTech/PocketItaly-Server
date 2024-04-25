@@ -1,8 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, Unique } from "typeorm";
 import { Product } from "./Product";
+import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
 
 @Entity({name: 'items'})
-export class Item extends Product{
+@Unique(['serialCode'])
+export class Item extends EntityBase{
 
     @Column({name: 'serial_code'})
     serialCode: string
