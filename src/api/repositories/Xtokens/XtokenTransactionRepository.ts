@@ -30,10 +30,10 @@ export class XtokenTransactionRepository extends RepositoryBase<XtokenTransactio
     });
   }
 
-  public async findTransactionsByXtoken (xTokenId: number) {
+  public async findTransactionsByXtoken (xtokenId: number) {
     return await this.repository.find({
       where:{
-        xtokenId:xTokenId
+        xtokenId:xtokenId
       }
     });
   }

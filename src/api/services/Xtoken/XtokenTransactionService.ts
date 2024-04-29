@@ -7,18 +7,18 @@ import { Inject, Service } from "typedi";
 @Service()
 export class XtokenService {
   @Inject()
-  private xTokenTransactionRepository: XtokenTransactionRepository;
+  private xtokenTransactionRepository: XtokenTransactionRepository;
 
-  public async insertXtokenTransaction(xTokenTransaction: XtokenTransaction) {
-    return await this.xTokenTransactionRepository.insertXtokenTransaction(xTokenTransaction);
+  public async insertXtokenTransaction(xtokenTransaction: XtokenTransaction) {
+    return await this.xtokenTransactionRepository.insertXtokenTransaction(xtokenTransaction);
   }
 
-  public async updateXtokenTransaction(xTokenTransaction: XtokenTransaction) {
-    return await this.xTokenTransactionRepository.updateXtokenTransaction(xTokenTransaction.id, xTokenTransaction);
+  public async updateXtokenTransaction(xtokenTransaction: XtokenTransaction) {
+    return await this.xtokenTransactionRepository.updateXtokenTransaction(xtokenTransaction.id, xtokenTransaction);
       }
 
 
   public async deleteXtokenTransaction(id: number) {
-    return await this.xTokenTransactionRepository.deleteXtokenTransaction(id);
+    return await this.xtokenTransactionRepository.deleteXtokenTransaction(id);
   }
 }

@@ -7,21 +7,21 @@ import { Inject, Service } from "typedi";
 @Service()
 export class XtokenTransactionStatusService {
   @Inject()
-  private xTokenTransactionStatusRepository: XtokenTransactionStatusRepository;
+  private xtokenTransactionStatusRepository: XtokenTransactionStatusRepository;
 
-  public async insertXtokenTransactionStatus(xTokenTransactionStatus: Partial<XtokenTransactionStatus>) {
-    return await this.xTokenTransactionStatusRepository.insertXtokenTransactionStatus(xTokenTransactionStatus);
+  public async insertXtokenTransactionStatus(xtokenTransactionStatus: Partial<XtokenTransactionStatus>) {
+    return await this.xtokenTransactionStatusRepository.insertXtokenTransactionStatus(xtokenTransactionStatus);
   }
 
-  public async updateXtokenTransactionStatus(xTokenTransactionStatus: XtokenTransactionStatus) {
-    return await this.xTokenTransactionStatusRepository.updateXtokenTransactionStatus(xTokenTransactionStatus.id, xTokenTransactionStatus);
+  public async updateXtokenTransactionStatus(xtokenTransactionStatus: XtokenTransactionStatus) {
+    return await this.xtokenTransactionStatusRepository.updateXtokenTransactionStatus(xtokenTransactionStatus.id, xtokenTransactionStatus);
   }
 
   public async deleteXtokenTransactionStatus(id: number) {
-    return await this.xTokenTransactionStatusRepository.delete(id);
+    return await this.xtokenTransactionStatusRepository.delete(id);
   }
 
   public async findOneXtokenTransactionStatusById(id: number) {
-    return await this.xTokenTransactionStatusRepository.findById(id);
+    return await this.xtokenTransactionStatusRepository.findById(id);
   }
 }

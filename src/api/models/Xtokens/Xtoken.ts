@@ -9,6 +9,7 @@ import {
 import { User } from "../Users/User";
 import { XtokenTransaction } from "./XtokenTransaction";
 import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
+import { Company } from "../Companies/Company";
 
 @Entity("xtokens")
 export class Xtoken extends EntityBase {
@@ -33,6 +34,9 @@ export class Xtoken extends EntityBase {
 
   @OneToMany(() => XtokenTransaction, (transaction) => transaction.xtoken)
   xtoken_transactions: XtokenTransaction[];
+
+  @ManyToOne(()=>Company,company=>company.xtokens)
+  company:Company
 
   //    @ManyToOne(() => Company, company => company.tokens)
   //    @JoinColumn({ name: 'issuedByCompany' })

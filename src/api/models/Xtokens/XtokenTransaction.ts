@@ -47,6 +47,6 @@ export class XtokenTransaction extends EntityBase {
   @JoinColumn({ name: "to_user" })
   toUser: User;
 
-  @OneToMany(() => XtokenTransactionStatus,xTokenTransactionStatus=> xTokenTransactionStatus.transaction)
+  @OneToMany(() => XtokenTransactionStatus,xtokenTransactionStatus=> xtokenTransactionStatus.transaction)
   statuses: XtokenTransactionStatus[];
 }
