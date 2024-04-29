@@ -22,7 +22,7 @@ export class XtokenTransactionStatus extends EntityBase {
 
     @CreateDateColumn({ name: "created_at" })
     createdAt: Date;
-  
+
     @UpdateDateColumn({ type: "timestamp", nullable: true, name: "modified_at" })
     modifiedAt: Date;
 
