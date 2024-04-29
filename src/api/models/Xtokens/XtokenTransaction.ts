@@ -5,6 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
+  UpdateDateColumn,
 } from "typeorm";
 import { Xtoken } from "./Xtoken";
 import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
@@ -22,8 +23,11 @@ export class XtokenTransaction extends EntityBase {
   @Column({ type: "int", nullable: false, name: "to_user" })
   toUserId: number;
 
-  @CreateDateColumn({ nullable: true, name: "created_at" })
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
+
+  @UpdateDateColumn({ type: "timestamp", nullable: true, name: "modified_at" })
+  modifiedAt: Date;
 
   @Column({
     type: "double precision",
