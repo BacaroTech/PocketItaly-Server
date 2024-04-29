@@ -6,7 +6,7 @@ import {
 } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 
-import { LoginRequest } from '@base/api/requests/Auth/LoginRequest';
+import { LoginRequest } from '@base/api/schemas/Auth/LoginRequest';
 import { LoginService } from '@base/api/services/Auth/LoginService';
 import { ControllerBase } from '@base/infrastructure/abstracts/ControllerBase';
 import { OpenAPI } from 'routing-controllers-openapi';

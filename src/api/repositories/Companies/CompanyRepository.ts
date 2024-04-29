@@ -2,6 +2,8 @@ import { RepositoryBase } from '@base/infrastructure/abstracts/RepositoryBase';
 import { Service } from 'typedi';
 import { AppDataSource } from '@base/config/db';
 import { Company } from '@base/api/models/Companies/Company';
+import { CompanySchema } from '@base/api/schemas/Companies/CompanySchema';
+
 
 @Service()
 export class CompanyRepository extends RepositoryBase<Company> {
@@ -10,10 +12,11 @@ export class CompanyRepository extends RepositoryBase<Company> {
     super(AppDataSource.getRepository(Company));
   }
 
-  public async createCompany(data: object) {
+  public async createCompany(data: CompanySchema) {
     let entity = new Company();
+    const metadata = {cap:data.cap,via:data.via,data}
 
-    Object.assign(entity, data);
+    Object.assign(entity, {...data,metadata});
 
     return await this.repository.save(entity);
   }
