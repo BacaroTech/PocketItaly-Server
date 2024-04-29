@@ -29,4 +29,14 @@ export class XtokenTransactionRepository extends RepositoryBase<XtokenTransactio
       id: id,
     });
   }
+
+  public async findTransactionsByXtoken (xTokenId: number) {
+    return await this.repository.find({
+      where:{
+        xtokenId:xTokenId
+      }
+    });
+  }
+
+
 }

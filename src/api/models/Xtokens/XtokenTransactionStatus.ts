@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { XtokenTransaction } from './XtokenTransaction'; // Assuming you have this entity defined
+import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 
 export enum TransactionStatus {
     SENT = "SENT",
@@ -11,9 +12,7 @@ export enum TransactionStatus {
 }
 
 @Entity('xtoken_transaction_statuses')
-export class XtokenTransactionStatus {
-    @PrimaryGeneratedColumn()
-    id: number;
+export class XtokenTransactionStatus extends EntityBase {
 
     @Column({
         type: "enum",

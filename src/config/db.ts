@@ -23,7 +23,7 @@ export const AppDataSource = new DataSource({
     username: dbConfig.dbUsername,
     password: dbConfig.dbPassword,
     database: dbConfig.dbDatabase,
-    synchronize: false,
+    synchronize: true,
     logging: true,
     entities: ['src/api/models/**/*{js,ts}'],
     // subscribers: [],

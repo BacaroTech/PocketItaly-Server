@@ -22,4 +22,8 @@ export class XtokenService {
   public async findOneXtokenById(id: number) {
     return await this.xtokenRepository.findById(id);
   }
+
+  public async findXtokenByUserId(userId: number) {
+    return await this.xtokenRepository.findXtokenByUserId(userId);
+  }
 }

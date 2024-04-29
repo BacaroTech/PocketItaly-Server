@@ -26,4 +26,14 @@ export class XtokenRepository extends RepositoryBase<Xtoken> {
       id: id,
     });
   }
+
+  public async findXtokenByUserId(userId: number) {
+    return await this.repository.find({
+      where:{
+        user:{
+          id:userId
+        }
+      }
+    });
+  }
 }
