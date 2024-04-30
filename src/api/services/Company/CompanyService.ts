@@ -1,5 +1,3 @@
-
-import { Company } from "@base/api/models/Companies/Company";
 import { CompanyRepository } from "@base/api/repositories/Companies/CompanyRepository";
 import { CompanySchema } from "@base/api/schemas/Companies/CompanySchema";
 

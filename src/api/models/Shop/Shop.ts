@@ -1,3 +1,4 @@
+import { AppFile } from '@base/api/interfaces/AppFileInterface';
 import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 import { Entity,  Column, CreateDateColumn, UpdateDateColumn, BaseEntity } from 'typeorm';
 
@@ -11,13 +12,16 @@ export class Shop extends EntityBase {
     piva: string | null;
 
     @Column({ type: 'json', nullable: true, name: 'indirizzo' })
-    indirizzo: any | null;
+    indirizzo: any | null;//TODO typizzare indirizzo
     
     @Column({ type: 'varchar', nullable: true, name: 'latitude' })
     latitude: any | null;
 
     @Column({ type: 'varchar', nullable: true, name: 'longitude' })
     longitude: any | null;
+
+    @Column({ type: 'json',nullable: true })
+    media: AppFile[];
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date | null;
