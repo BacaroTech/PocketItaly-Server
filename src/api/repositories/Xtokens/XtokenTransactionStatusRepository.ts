@@ -1,26 +1,26 @@
 import { RepositoryBase } from "@base/infrastructure/abstracts/RepositoryBase";
 import { Service } from "typedi";
 import { AppDataSource } from "@base/config/db";
-import { XtokenTransactionStatus } from "@base/api/models/Xtokens/XtokenTransactionStatus";
+import { TokenTransactionStatus } from "@base/api/models/Tokens/TokenTransactionStatus";
 
 @Service()
-export class XtokenTransactionStatusRepository extends RepositoryBase<XtokenTransactionStatus> {
+export class TokenTransactionStatusRepository extends RepositoryBase<TokenTransactionStatus> {
   constructor() {
-    super(AppDataSource.getRepository(XtokenTransactionStatus));
+    super(AppDataSource.getRepository(TokenTransactionStatus));
   }
 
-  public async insertXtokenTransactionStatus(data: Partial<XtokenTransactionStatus>) {
+  public async insertTokenTransactionStatus(data: Partial<TokenTransactionStatus>) {
     return await this.create(data);
   }
 
-  public async updateXtokenTransactionStatus(
+  public async updateTokenTransactionStatus(
     id: number,
-    xtokenTransaction: XtokenTransactionStatus
+    tokenTransaction: TokenTransactionStatus
   ) {
-    return await this.update(id, xtokenTransaction);
+    return await this.update(id, tokenTransaction);
   }
 
-  public async deleteXtokenTransactionStatus(id: number) {
+  public async deleteTokenTransactionStatus(id: number) {
     return await this.delete(id);
   }
 

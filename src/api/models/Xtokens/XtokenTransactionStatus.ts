@@ -1,5 +1,5 @@
 import { Entity,  Column, CreateDateColumn, ManyToOne, JoinColumn, UpdateDateColumn } from 'typeorm';
-import { XtokenTransaction } from './XtokenTransaction'; // Assuming you have this entity defined
+import { TokenTransaction } from './TokenTransaction'; // Assuming you have this entity defined
 import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 
 export enum TransactionStatus {
@@ -11,8 +11,8 @@ export enum TransactionStatus {
     CANCELLED = "CANCELLED"
 }
 
-@Entity('xtoken_transaction_statuses')
-export class XtokenTransactionStatus extends EntityBase {
+@Entity('token_transaction_statuses')
+export class TokenTransactionStatus extends EntityBase {
 
     @Column({
         type: "enum",
@@ -32,7 +32,7 @@ export class XtokenTransactionStatus extends EntityBase {
     @Column({ nullable: true,name:"transaction_id" })
     transactionId: number;
 
-    @ManyToOne(() => XtokenTransaction, transaction => transaction.statuses)
+    @ManyToOne(() => TokenTransaction, transaction => transaction.statuses)
     @JoinColumn({ name: 'transaction_id' })
-    transaction: XtokenTransaction;
+    transaction: TokenTransaction;
 }

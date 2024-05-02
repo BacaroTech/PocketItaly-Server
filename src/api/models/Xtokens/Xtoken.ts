@@ -8,12 +8,12 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { User } from "../Users/User";
-import { XtokenTransaction } from "./XtokenTransaction";
+import { TokenTransaction } from "./TokenTransaction";
 import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
 import { Company } from "../Companies/Company";
 
-@Entity("xtokens")
-export class Xtoken extends EntityBase {
+@Entity("tokens")
+export class Token extends EntityBase {
   @Column({ type: "int", nullable: false, name: "item_id" })
   itemId: number;
 
@@ -29,14 +29,14 @@ export class Xtoken extends EntityBase {
   @Column({ type: "int", nullable: false, name: "issued_by_company" })
   issuedByCompany: number;
 
-  @ManyToOne(() => User, (user) => user.xtokens)
+  @ManyToOne(() => User, (user) => user.tokens)
   @JoinColumn({ name: "belongs_to" })
   user: User;
 
-  @OneToMany(() => XtokenTransaction, (transaction) => transaction.xtoken)
-  xtokenTransactions: XtokenTransaction[];
+  @OneToMany(() => TokenTransaction, (transaction) => transaction.token)
+  tokenTransactions: TokenTransaction[];
 
-  @ManyToOne(()=>Company,company=>company.xtokens)
+  @ManyToOne(()=>Company,company=>company.tokens)
   company:Company
 
   //    @ManyToOne(() => Company, company => company.tokens)

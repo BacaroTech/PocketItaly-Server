@@ -1,27 +1,27 @@
-import { Xtoken } from "@base/api/models/Xtokens/Xtoken";
-import { XtokenTransactionStatus } from "@base/api/models/Xtokens/XtokenTransactionStatus";
-import { XtokenRepository } from "@base/api/repositories/Xtokens/XtokenRepository";
-import { XtokenTransactionStatusRepository } from "@base/api/repositories/Xtokens/XtokenTransactionStatusRepository";
+import { Token } from "@base/api/models/Tokens/Token";
+import { TokenTransactionStatus } from "@base/api/models/Tokens/TokenTransactionStatus";
+import { TokenRepository } from "@base/api/repositories/Tokens/TokenRepository";
+import { TokenTransactionStatusRepository } from "@base/api/repositories/Tokens/TokenTransactionStatusRepository";
 import { Inject, Service } from "typedi";
 
 @Service()
-export class XtokenTransactionStatusService {
+export class TokenTransactionStatusService {
   @Inject()
-  private xtokenTransactionStatusRepository: XtokenTransactionStatusRepository;
+  private tokenTransactionStatusRepository: TokenTransactionStatusRepository;
 
-  public async insertXtokenTransactionStatus(xtokenTransactionStatus: Partial<XtokenTransactionStatus>) {
-    return await this.xtokenTransactionStatusRepository.insertXtokenTransactionStatus(xtokenTransactionStatus);
+  public async insertTokenTransactionStatus(tokenTransactionStatus: Partial<TokenTransactionStatus>) {
+    return await this.tokenTransactionStatusRepository.insertTokenTransactionStatus(tokenTransactionStatus);
   }
 
-  public async updateXtokenTransactionStatus(xtokenTransactionStatus: XtokenTransactionStatus) {
-    return await this.xtokenTransactionStatusRepository.updateXtokenTransactionStatus(xtokenTransactionStatus.id, xtokenTransactionStatus);
+  public async updateTokenTransactionStatus(tokenTransactionStatus: TokenTransactionStatus) {
+    return await this.tokenTransactionStatusRepository.updateTokenTransactionStatus(tokenTransactionStatus.id, tokenTransactionStatus);
   }
 
-  public async deleteXtokenTransactionStatus(id: number) {
-    return await this.xtokenTransactionStatusRepository.delete(id);
+  public async deleteTokenTransactionStatus(id: number) {
+    return await this.tokenTransactionStatusRepository.delete(id);
   }
 
-  public async findOneXtokenTransactionStatusById(id: number) {
-    return await this.xtokenTransactionStatusRepository.findById(id);
+  public async findOneTokenTransactionStatusById(id: number) {
+    return await this.tokenTransactionStatusRepository.findById(id);
   }
 }

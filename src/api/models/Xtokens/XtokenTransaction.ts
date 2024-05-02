@@ -7,15 +7,15 @@ import {
   OneToMany,
   UpdateDateColumn,
 } from "typeorm";
-import { Xtoken } from "./Xtoken";
+import { Token } from "./Token";
 import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
 import { User } from "../Users/User";
-import { XtokenTransactionStatus } from "./XtokenTransactionStatus";
+import { TokenTransactionStatus } from "./TokenTransactionStatus";
 
-@Entity("xtoken_transactions")
-export class XtokenTransaction extends EntityBase {
-  @Column({ type: "int", nullable: true, name: "xtoken_id" })
-  xtokenId: number;
+@Entity("token_transactions")
+export class TokenTransaction extends EntityBase {
+  @Column({ type: "int", nullable: true, name: "token_id" })
+  tokenId: number;
 
   @Column({ type: "int", nullable: false, name: "from_user" })
   fromUserId: number;
@@ -39,9 +39,9 @@ export class XtokenTransaction extends EntityBase {
   })
   longitude: number;
 
-  @ManyToOne(() => Xtoken)
-  @JoinColumn({ name: "xtoken_id" })
-  xtoken: Xtoken;
+  @ManyToOne(() => Token)
+  @JoinColumn({ name: "token_id" })
+  token: Token;
 
   @ManyToOne(() => User)
   @JoinColumn({ name: "from_user" })
@@ -51,6 +51,6 @@ export class XtokenTransaction extends EntityBase {
   @JoinColumn({ name: "to_user" })
   toUser: User;
 
-  @OneToMany(() => XtokenTransactionStatus,xtokenTransactionStatus=> xtokenTransactionStatus.transaction)
-  statuses: XtokenTransactionStatus[];
+  @OneToMany(() => TokenTransactionStatus,tokenTransactionStatus=> tokenTransactionStatus.transaction)
+  statuses: TokenTransactionStatus[];
 }

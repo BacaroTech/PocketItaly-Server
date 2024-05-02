@@ -1,24 +1,24 @@
-import { Xtoken } from "@base/api/models/Xtokens/Xtoken";
-import { XtokenTransaction } from "@base/api/models/Xtokens/XtokenTransaction";
-import { XtokenRepository } from "@base/api/repositories/Xtokens/XtokenRepository";
-import { XtokenTransactionRepository } from "@base/api/repositories/Xtokens/XtokenTransactionRepository";
+import { Token } from "@base/api/models/Tokens/Token";
+import { TokenTransaction } from "@base/api/models/Tokens/TokenTransaction";
+import { TokenRepository } from "@base/api/repositories/Tokens/TokenRepository";
+import { TokenTransactionRepository } from "@base/api/repositories/Tokens/TokenTransactionRepository";
 import { Inject, Service } from "typedi";
 
 @Service()
-export class XtokenService {
+export class TokenService {
   @Inject()
-  private xtokenTransactionRepository: XtokenTransactionRepository;
+  private tokenTransactionRepository: TokenTransactionRepository;
 
-  public async insertXtokenTransaction(xtokenTransaction: XtokenTransaction) {
-    return await this.xtokenTransactionRepository.insertXtokenTransaction(xtokenTransaction);
+  public async insertTokenTransaction(tokenTransaction: TokenTransaction) {
+    return await this.tokenTransactionRepository.insertTokenTransaction(tokenTransaction);
   }
 
-  public async updateXtokenTransaction(xtokenTransaction: XtokenTransaction) {
-    return await this.xtokenTransactionRepository.updateXtokenTransaction(xtokenTransaction.id, xtokenTransaction);
+  public async updateTokenTransaction(tokenTransaction: TokenTransaction) {
+    return await this.tokenTransactionRepository.updateTokenTransaction(tokenTransaction.id, tokenTransaction);
       }
 
 
-  public async deleteXtokenTransaction(id: number) {
-    return await this.xtokenTransactionRepository.deleteXtokenTransaction(id);
+  public async deleteTokenTransaction(id: number) {
+    return await this.tokenTransactionRepository.deleteTokenTransaction(id);
   }
 }

@@ -1,26 +1,26 @@
 import { RepositoryBase } from "@base/infrastructure/abstracts/RepositoryBase";
 import { Service } from "typedi";
 import { AppDataSource } from "@base/config/db";
-import { XtokenTransaction } from "@base/api/models/Xtokens/XtokenTransaction";
+import { TokenTransaction } from "@base/api/models/Tokens/TokenTransaction";
 
 @Service()
-export class XtokenTransactionRepository extends RepositoryBase<XtokenTransaction> {
+export class TokenTransactionRepository extends RepositoryBase<TokenTransaction> {
   constructor() {
-    super(AppDataSource.getRepository(XtokenTransaction));
+    super(AppDataSource.getRepository(TokenTransaction));
   }
 
-  public async insertXtokenTransaction(data: Partial<XtokenTransaction>) {
+  public async insertTokenTransaction(data: Partial<TokenTransaction>) {
     return await this.create(data);
   }
 
-  public async updateXtokenTransaction(
+  public async updateTokenTransaction(
     id: number,
-    xtokenTransaction: XtokenTransaction
+    tokenTransaction: TokenTransaction
   ) {
-    return await this.update(id, xtokenTransaction);
+    return await this.update(id, tokenTransaction);
   }
 
-  public async deleteXtokenTransaction(id: number) {
+  public async deleteTokenTransaction(id: number) {
     return await this.delete(id);
   }
 
@@ -30,10 +30,10 @@ export class XtokenTransactionRepository extends RepositoryBase<XtokenTransactio
     });
   }
 
-  public async findTransactionsByXtoken (xtokenId: number) {
+  public async findTransactionsByToken (tokenId: number) {
     return await this.repository.find({
       where:{
-        xtokenId:xtokenId
+        tokenId:tokenId
       }
     });
   }

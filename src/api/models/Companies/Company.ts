@@ -1,6 +1,6 @@
 import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 import { Entity,  Column, CreateDateColumn, UpdateDateColumn, BaseEntity, OneToMany, JoinColumn } from 'typeorm';
-import { Xtoken } from '../Xtokens/Xtoken';
+import { Token } from '../Tokens/Token';
 import { AppFile } from '@base/api/interfaces/AppFileInterface';
 import { Product } from '../Products/Product';
 
@@ -25,8 +25,8 @@ export class Company extends EntityBase {
     @UpdateDateColumn({ type: 'timestamp', nullable: true, name: 'modified_at' })
     modifiedAt: Date | null;
 
-    @OneToMany(()=>Xtoken,xtoken=>xtoken.company)
-    xtokens:Xtoken[]
+    @OneToMany(()=>Token,token=>token.company)
+    tokens:Token[]
 
     @OneToMany(()=>Product,product=>product.companyId)
     products:Product[]

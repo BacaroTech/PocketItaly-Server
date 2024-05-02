@@ -14,7 +14,7 @@ import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
 import { HashService } from "@base/infrastructure/services/hash/HashService";
 
 import { Role } from "./Role";
-import { Xtoken } from "../Xtokens/Xtoken";
+import { Token } from "../Tokens/Token";
 
 @Entity({ name: "users" })
 export class User extends EntityBase {
@@ -58,8 +58,8 @@ export class User extends EntityBase {
   // @OneToMany(() => Orders, order => order.user)
   // orders: Orders[];
 
-  @OneToMany(() => Xtoken, (xtoken) => xtoken.user)
-  xtokens: Xtoken[];
+  @OneToMany(() => Token, (token) => token.user)
+  tokens: Token[];
 
   // @ManyToOne(() => Role, role => role.users)
   // @JoinColumn({ name: 'role_id', referencedColumnName: 'id' })

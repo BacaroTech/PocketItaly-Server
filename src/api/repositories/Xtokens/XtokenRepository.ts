@@ -1,23 +1,23 @@
 import { RepositoryBase } from "@base/infrastructure/abstracts/RepositoryBase";
 import { Service } from "typedi";
 import { AppDataSource } from "@base/config/db";
-import { Xtoken } from "@base/api/models/Xtokens/Xtoken";
+import { Token } from "@base/api/models/Tokens/Token";
 
 @Service()
-export class XtokenRepository extends RepositoryBase<Xtoken> {
+export class TokenRepository extends RepositoryBase<Token> {
   constructor() {
-    super(AppDataSource.getRepository(Xtoken));
+    super(AppDataSource.getRepository(Token));
   }
 
-  public async insertXtoken(data: object) {
+  public async insertToken(data: object) {
     return await this.create(data);
   }
 
-  public async updateXtoken(id: number, xtoken: Xtoken) {
-    return await this.update(id, xtoken);
+  public async updateToken(id: number, token: Token) {
+    return await this.update(id, token);
   }
 
-  public async deleteXtoken(id: number) {
+  public async deleteToken(id: number) {
     return await this.delete(id);
   }
 
@@ -27,7 +27,7 @@ export class XtokenRepository extends RepositoryBase<Xtoken> {
     });
   }
 
-  public async findXtokenByUserId(userId: number) {
+  public async findTokenByUserId(userId: number) {
     return await this.repository.find({
       where:{
         user:{

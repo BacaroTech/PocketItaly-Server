@@ -1,29 +1,29 @@
-import { Xtoken } from "@base/api/models/Xtokens/Xtoken";
-import { XtokenRepository } from "@base/api/repositories/Xtokens/XtokenRepository";
+import { Token } from "@base/api/models/Tokens/Token";
+import { TokenRepository } from "@base/api/repositories/Tokens/TokenRepository";
 import { Inject, Service } from "typedi";
 
 @Service()
-export class XtokenService {
+export class TokenService {
   @Inject()
-  private xtokenRepository: XtokenRepository;
+  private tokenRepository: TokenRepository;
 
-  public async insertXtoken(xtoken: Xtoken) {
-    return await this.xtokenRepository.insertXtoken(xtoken);
+  public async insertToken(token: Token) {
+    return await this.tokenRepository.insertToken(token);
   }
 
-  public async updateXtoken(xtoken: Xtoken) {
-    return await this.xtokenRepository.updateXtoken(xtoken.id, xtoken);
+  public async updateToken(token: Token) {
+    return await this.tokenRepository.updateToken(token.id, token);
   }
 
-  public async deleteXtoken(id: number) {
-    return await this.xtokenRepository.deleteXtoken(id);
+  public async deleteToken(id: number) {
+    return await this.tokenRepository.deleteToken(id);
   }
 
-  public async findOneXtokenById(id: number) {
-    return await this.xtokenRepository.findById(id);
+  public async findOneTokenById(id: number) {
+    return await this.tokenRepository.findById(id);
   }
 
-  public async findXtokenByUserId(userId: number) {
-    return await this.xtokenRepository.findXtokenByUserId(userId);
+  public async findTokenByUserId(userId: number) {
+    return await this.tokenRepository.findTokenByUserId(userId);
   }
 }

@@ -124,26 +124,26 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 --
 -- TOC entry 218 (class 1259 OID 16395)
--- Name: xtoken_transactions; Type: TABLE; Schema: public; Owner: postgres
+-- Name: token_transactions; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.xtoken_transactions (
+CREATE TABLE public.token_transactions (
     id bigint NOT NULL,
-    xtoken_id integer,
+    token_id integer,
     from_user integer NOT NULL,
     to_user integer NOT NULL,
     created_at timestamp without time zone DEFAULT now()
 );
 
 
-ALTER TABLE public.xtoken_transactions OWNER TO postgres;
+ALTER TABLE public.token_transactions OWNER TO postgres;
 
 --
 -- TOC entry 217 (class 1259 OID 16394)
--- Name: xtoken_transactions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: token_transactions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.xtoken_transactions_id_seq
+CREATE SEQUENCE public.token_transactions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -151,23 +151,23 @@ CREATE SEQUENCE public.xtoken_transactions_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.xtoken_transactions_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.token_transactions_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 3396 (class 0 OID 0)
 -- Dependencies: 217
--- Name: xtoken_transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: token_transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.xtoken_transactions_id_seq OWNED BY public.xtoken_transactions.id;
+ALTER SEQUENCE public.token_transactions_id_seq OWNED BY public.token_transactions.id;
 
 
 --
 -- TOC entry 220 (class 1259 OID 16403)
--- Name: xtokens; Type: TABLE; Schema: public; Owner: postgres
+-- Name: tokens; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.xtokens (
+CREATE TABLE public.tokens (
     id integer NOT NULL,
     item_id integer NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
@@ -177,14 +177,14 @@ CREATE TABLE public.xtokens (
 );
 
 
-ALTER TABLE public.xtokens OWNER TO postgres;
+ALTER TABLE public.tokens OWNER TO postgres;
 
 --
 -- TOC entry 219 (class 1259 OID 16402)
--- Name: xtokens_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: tokens_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.xtokens_id_seq
+CREATE SEQUENCE public.tokens_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -193,15 +193,15 @@ CREATE SEQUENCE public.xtokens_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.xtokens_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.tokens_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 3397 (class 0 OID 0)
 -- Dependencies: 219
--- Name: xtokens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: tokens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.xtokens_id_seq OWNED BY public.xtokens.id;
+ALTER SEQUENCE public.tokens_id_seq OWNED BY public.tokens.id;
 
 
 --
@@ -222,18 +222,18 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 --
 -- TOC entry 3219 (class 2604 OID 16398)
--- Name: xtoken_transactions id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: token_transactions id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.xtoken_transactions ALTER COLUMN id SET DEFAULT nextval('public.xtoken_transactions_id_seq'::regclass);
+ALTER TABLE ONLY public.token_transactions ALTER COLUMN id SET DEFAULT nextval('public.token_transactions_id_seq'::regclass);
 
 
 --
 -- TOC entry 3221 (class 2604 OID 16406)
--- Name: xtokens id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: tokens id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.xtokens ALTER COLUMN id SET DEFAULT nextval('public.xtokens_id_seq'::regclass);
+ALTER TABLE ONLY public.tokens ALTER COLUMN id SET DEFAULT nextval('public.tokens_id_seq'::regclass);
 
 
 --
@@ -255,7 +255,7 @@ ALTER TABLE ONLY public.xtokens ALTER COLUMN id SET DEFAULT nextval('public.xtok
 --
 -- TOC entry 3383 (class 0 OID 16395)
 -- Dependencies: 218
--- Data for Name: xtoken_transactions; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: token_transactions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
@@ -263,7 +263,7 @@ ALTER TABLE ONLY public.xtokens ALTER COLUMN id SET DEFAULT nextval('public.xtok
 --
 -- TOC entry 3385 (class 0 OID 16403)
 -- Dependencies: 220
--- Data for Name: xtokens; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: tokens; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
@@ -289,36 +289,36 @@ SELECT pg_catalog.setval('public.users_id_seq', 1, false);
 --
 -- TOC entry 3400 (class 0 OID 0)
 -- Dependencies: 217
--- Name: xtoken_transactions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: token_transactions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.xtoken_transactions_id_seq', 1, false);
+SELECT pg_catalog.setval('public.token_transactions_id_seq', 1, false);
 
 
 --
 -- TOC entry 3401 (class 0 OID 0)
 -- Dependencies: 219
--- Name: xtokens_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: tokens_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.xtokens_id_seq', 1, false);
+SELECT pg_catalog.setval('public.tokens_id_seq', 1, false);
 
 
 --
 -- TOC entry 3229 (class 2606 OID 16409)
--- Name: xtokens PK_0c4fd35b048a6f39c7a1a0ca573; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: tokens PK_0c4fd35b048a6f39c7a1a0ca573; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.xtokens
+ALTER TABLE ONLY public.tokens
     ADD CONSTRAINT "PK_0c4fd35b048a6f39c7a1a0ca573" PRIMARY KEY (id);
 
 
 --
 -- TOC entry 3227 (class 2606 OID 16401)
--- Name: xtoken_transactions PK_511f250da561a2ab7d79b206023; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: token_transactions PK_511f250da561a2ab7d79b206023; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.xtoken_transactions
+ALTER TABLE ONLY public.token_transactions
     ADD CONSTRAINT "PK_511f250da561a2ab7d79b206023" PRIMARY KEY (id);
 
 
@@ -351,20 +351,20 @@ ALTER TABLE ONLY public.users
 
 --
 -- TOC entry 3235 (class 2606 OID 16426)
--- Name: xtokens FK_0d7a2de45b7b9577fddce24b384; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: tokens FK_0d7a2de45b7b9577fddce24b384; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.xtokens
+ALTER TABLE ONLY public.tokens
     ADD CONSTRAINT "FK_0d7a2de45b7b9577fddce24b384" FOREIGN KEY (belongs_to) REFERENCES public.users(id);
 
 
 --
 -- TOC entry 3234 (class 2606 OID 16421)
--- Name: xtoken_transactions FK_625922358a26609eed7a5a434fe; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: token_transactions FK_625922358a26609eed7a5a434fe; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.xtoken_transactions
-    ADD CONSTRAINT "FK_625922358a26609eed7a5a434fe" FOREIGN KEY (xtoken_id) REFERENCES public.xtokens(id);
+ALTER TABLE ONLY public.token_transactions
+    ADD CONSTRAINT "FK_625922358a26609eed7a5a434fe" FOREIGN KEY (token_id) REFERENCES public.tokens(id);
 
 
 --

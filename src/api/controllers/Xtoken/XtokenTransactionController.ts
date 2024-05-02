@@ -5,9 +5,9 @@ import { OpenAPI } from "routing-controllers-openapi";
 
 @Service()
 @OpenAPI({
-  tags: ["Xtoken"],
+  tags: ["Token"],
 })
-@JsonController("/xtoken-transaction")
+@JsonController("/token-transaction")
 export class LoginController extends ControllerBase {
   public constructor() {
     super();
