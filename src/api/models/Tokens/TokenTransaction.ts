@@ -29,15 +29,11 @@ export class TokenTransaction extends EntityBase {
   @UpdateDateColumn({ type: "timestamp", nullable: true, name: "modified_at" })
   modifiedAt: Date;
 
-  @Column({
-    type: "double precision",
-  })
-  latitude: number;
+  @Column()
+  latitude: string;
 
-  @Column({
-    type: "double precision",
-  })
-  longitude: number;
+  @Column()
+  longitude: string;
 
   @ManyToOne(() => Token)
   @JoinColumn({ name: "token_id" })

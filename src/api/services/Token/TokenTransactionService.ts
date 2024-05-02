@@ -1,15 +1,26 @@
-import { Token } from "@base/api/models/Tokens/Token";
+import { UserNotFoundException } from "@base/api/exceptions/Users/UserNotFoundException";
 import { TokenTransaction } from "@base/api/models/Tokens/TokenTransaction";
-import { TokenRepository } from "@base/api/repositories/Tokens/TokenRepository";
+import { TokenTransactionStatus, TransactionStatus } from "@base/api/models/Tokens/TokenTransactionStatus";
+import { User } from "@base/api/models/Users/User";
 import { TokenTransactionRepository } from "@base/api/repositories/Tokens/TokenTransactionRepository";
+import { TokenTransactionStatusRepository } from "@base/api/repositories/Tokens/TokenTransactionStatusRepository";
+import { UserRepository } from "@base/api/repositories/Users/UserRepository";
+import { SendTokenBody } from "@base/api/schemas/Token/FlussoTokenSchema";
 import { Inject, Service } from "typedi";
 
 @Service()
 export class TokenService {
   @Inject()
   private tokenTransactionRepository: TokenTransactionRepository;
+    
+  @Inject()
+  private userRepository: UserRepository;
 
-  public async insertTokenTransaction(tokenTransaction: TokenTransaction) {
+  @Inject()
+  private tokenTransactionStatusRepository: TokenTransactionStatusRepository;
+
+
+  public async insertTokenTransaction(tokenTransaction: Partial<TokenTransaction>) {
     return await this.tokenTransactionRepository.insertTokenTransaction(tokenTransaction);
   }
 
@@ -20,5 +31,28 @@ export class TokenService {
 
   public async deleteTokenTransaction(id: number) {
     return await this.tokenTransactionRepository.deleteTokenTransaction(id);
+  }
+
+
+  public async createTokenTransaction(user: User, data: SendTokenBody) {
+    const receiverId = await this.userRepository.findOneByEmail(data.email);
+
+    if (!receiverId) {
+      throw new UserNotFoundException();
+    }
+
+    const tokenTransaction = {
+      ...data,
+      fromUserId: user.id,
+      toUserId: receiverId?.id,
+    };
+
+    //TODO INSERT INTO SINGLE SQL TRX
+    const newTransaction = await this.insertTokenTransaction(tokenTransaction);
+    const tokenTransactionStatus = {status: TransactionStatus.SENT,transactionId: newTransaction.id};
+    await this.tokenTransactionStatusRepository.insertTokenTransactionStatus(
+      tokenTransactionStatus
+    );
+    return newTransaction
   }
 }

@@ -1,6 +1,4 @@
-import { Token } from "@base/api/models/Tokens/Token";
 import { TokenTransactionStatus } from "@base/api/models/Tokens/TokenTransactionStatus";
-import { TokenRepository } from "@base/api/repositories/Tokens/TokenRepository";
 import { TokenTransactionStatusRepository } from "@base/api/repositories/Tokens/TokenTransactionStatusRepository";
 import { Inject, Service } from "typedi";
 

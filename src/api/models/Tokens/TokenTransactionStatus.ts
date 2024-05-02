@@ -4,10 +4,9 @@ import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 
 export enum TransactionStatus {
     SENT = "SENT",
-    RECEIVED = "RECEIVED",
     VERIFIED = "VERIFIED",
     INVALID = "INVALID",
-    SIGNAL = "SIGNAL",
+    REPORTED = "REPORTED",
     CANCELLED = "CANCELLED"
 }
 
