@@ -15,6 +15,7 @@ import { HashService } from "@base/infrastructure/services/hash/HashService";
 
 import { Role } from "./Role";
 import { Xtoken } from "../Xtokens/Xtoken";
+import { Report } from "../Reports/Report";
 
 @Entity({ name: "users" })
 export class User extends EntityBase {
@@ -64,4 +65,7 @@ export class User extends EntityBase {
   // @ManyToOne(() => Role, role => role.users)
   // @JoinColumn({ name: 'role_id', referencedColumnName: 'id' })
   // role: Role;
+
+  @OneToMany(() => Report, (report) => report.user)
+  reports: Report[]
 }
