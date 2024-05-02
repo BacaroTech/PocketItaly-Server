@@ -10,7 +10,7 @@ const dbConfig = {
   dbDatabase: env('TYPEORM_DATABASE'),
   dbUsername: env('TYPEORM_USERNAME'),
   dbPassword: env('TYPEORM_PASSWORD'),
-  dbEntities: env('TYPEORM_ENTITIES'),
+  dbEntities: env('TYPEORM_ENTITIES_DIR'),
   dbSchema: env('TYPEORM_SCHEMA'),
   allowLogging: env('TYPEORM_LOGGING'),
 };
@@ -23,9 +23,9 @@ export const AppDataSource = new DataSource({
     username: dbConfig.dbUsername,
     password: dbConfig.dbPassword,
     database: dbConfig.dbDatabase,
-    synchronize: false,
+    synchronize: true,
     logging: true,
-    entities: ['src/api/models/**/*{js,ts}'],
+    entities: [dbConfig.dbEntities],
     // subscribers: [],
     // migrations: [],
 })
