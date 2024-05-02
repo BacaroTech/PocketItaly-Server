@@ -1,7 +1,8 @@
 import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
-import { Entity,  Column, CreateDateColumn, UpdateDateColumn, BaseEntity, OneToMany } from 'typeorm';
+import { Entity,  Column, CreateDateColumn, UpdateDateColumn, BaseEntity, OneToMany, JoinColumn } from 'typeorm';
 import { Xtoken } from '../Xtokens/Xtoken';
 import { AppFile } from '@base/api/interfaces/AppFileInterface';
+import { Product } from '../Products/Product';
 
 @Entity('companies')
 export class Company extends EntityBase {
@@ -26,4 +27,7 @@ export class Company extends EntityBase {
 
     @OneToMany(()=>Xtoken,xtoken=>xtoken.company)
     xtokens:Xtoken[]
+
+    @OneToMany(()=>Product,product=>product.companyId)
+    products:Product[]
 }

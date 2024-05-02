@@ -34,7 +34,7 @@ export class Xtoken extends EntityBase {
   user: User;
 
   @OneToMany(() => XtokenTransaction, (transaction) => transaction.xtoken)
-  xtoken_transactions: XtokenTransaction[];
+  xtokenTransactions: XtokenTransaction[];
 
   @ManyToOne(()=>Company,company=>company.xtokens)
   company:Company

@@ -1,6 +1,6 @@
 import { AppFile } from '@base/api/interfaces/AppFileInterface';
 import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
-import { Entity,  Column, CreateDateColumn, UpdateDateColumn, BaseEntity } from 'typeorm';
+import { Entity,  Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('shops')
 export class Shop extends EntityBase {
