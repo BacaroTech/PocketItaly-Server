@@ -1,7 +1,7 @@
 import { ControllerBase } from "@base/infrastructure/abstracts/ControllerBase";
 import { JsonController, Post, Body } from "routing-controllers";
 import { Inject, Service } from "typedi";
-import { RegisterRequest } from '@api/requests/Auth/RegisterRequest';
+import { RegisterRequest } from '@base/api/schemas/Auth/RegisterRequest';
 import { RegisterService } from '@api/services/Auth/RegisterService';
 import { OpenAPI } from "routing-controllers-openapi";
 

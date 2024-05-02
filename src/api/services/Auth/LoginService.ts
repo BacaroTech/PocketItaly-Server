@@ -2,7 +2,7 @@ import { Inject, Service } from 'typedi';
 
 import { InvalidCredentials } from '@api/exceptions/Auth/InvalidCredentials';
 import { UserRepository } from '@api/repositories/Users/UserRepository';
-import { LoginRequest } from '@base/api/requests/Auth/LoginRequest';
+import { LoginRequest } from '@base/api/schemas/Auth/LoginRequest';
 import { AuthService } from '@base/infrastructure/services/auth/AuthService';
 import { HashService } from '@base/infrastructure/services/hash/HashService';
 

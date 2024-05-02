@@ -3,7 +3,7 @@ import { UserRepository } from '@api/repositories/Users/UserRepository';
 import { EventDispatcher, EventDispatcherInterface } from '@base/decorators/EventDispatcher';
 import { AuthService } from '@base/infrastructure/services/auth/AuthService';
 import { RegistrationError } from '@base/api/exceptions/Auth/RegistrationError';
-import { RegisterRequest } from '@base/api/requests/Auth/RegisterRequest';
+import { RegisterRequest } from '@base/api/schemas/Auth/RegisterRequest';
 import { MexLogger } from '@base/utils/logger';
 import { GenericException } from '@base/api/exceptions/Application/GenericException';
 
