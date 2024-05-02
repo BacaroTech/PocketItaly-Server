@@ -6,16 +6,16 @@ import {
   JoinColumn,
   OneToMany,
   UpdateDateColumn,
+  OneToOne,
 } from "typeorm";
 import { User } from "../Users/User";
 import { TokenTransaction } from "./TokenTransaction";
 import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
 import { Company } from "../Companies/Company";
+import { Item } from "../Products/Item";
 
 @Entity("tokens")
 export class Token extends EntityBase {
-  @Column({ type: "int", nullable: false, name: "item_id" })
-  itemId: number;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
@@ -38,6 +38,9 @@ export class Token extends EntityBase {
 
   @ManyToOne(()=>Company,company=>company.tokens)
   company:Company
+
+  @OneToOne(()=>Item)
+  item:Item
 
   //    @ManyToOne(() => Company, company => company.tokens)
   //    @JoinColumn({ name: 'issuedByCompany' })

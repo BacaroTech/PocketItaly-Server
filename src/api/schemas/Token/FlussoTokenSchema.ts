@@ -30,7 +30,7 @@ import {
 
     @IsNotEmpty()
     @IsString()
-    serialId: string;
+    serialCode: string;
 
   }
    

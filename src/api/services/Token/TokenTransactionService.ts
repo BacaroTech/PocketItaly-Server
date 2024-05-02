@@ -9,7 +9,7 @@ import { SendTokenBody } from "@base/api/schemas/Token/FlussoTokenSchema";
 import { Inject, Service } from "typedi";
 
 @Service()
-export class TokenService {
+export class TokenTransactionService {
   @Inject()
   private tokenTransactionRepository: TokenTransactionRepository;
     
@@ -45,11 +45,12 @@ export class TokenService {
       ...data,
       fromUserId: user.id,
       toUserId: receiverId?.id,
+      status: TransactionStatus.PENDING
     };
 
     //TODO INSERT INTO SINGLE SQL TRX
     const newTransaction = await this.insertTokenTransaction(tokenTransaction);
-    const tokenTransactionStatus = {status: TransactionStatus.SENT,transactionId: newTransaction.id};
+    const tokenTransactionStatus = {status: TransactionStatus.PENDING,transactionId: newTransaction.id};
     await this.tokenTransactionStatusRepository.insertTokenTransactionStatus(
       tokenTransactionStatus
     );

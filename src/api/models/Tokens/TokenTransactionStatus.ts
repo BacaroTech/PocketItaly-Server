@@ -3,7 +3,7 @@ import { TokenTransaction } from './TokenTransaction'; // Assuming you have this
 import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 
 export enum TransactionStatus {
-    SENT = "SENT",
+    PENDING = "PENDING",
     VERIFIED = "VERIFIED",
     INVALID = "INVALID",
     REPORTED = "REPORTED",

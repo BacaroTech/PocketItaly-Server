@@ -1,8 +1,13 @@
-import { Body, Get, JsonController, Param, Post } from "routing-controllers";
-import { Service } from "typedi";
+import { Body, Get, JsonController, Middleware, NotFoundError, Param, Post, QueryParam, Req, UseBefore } from "routing-controllers";
+import { Inject, Service } from "typedi";
 import { ControllerBase } from "@base/infrastructure/abstracts/ControllerBase";
 import { OpenAPI } from "routing-controllers-openapi";
 import { ReportTokenBody, SendTokenBody, ValidateTokenBody } from "@base/api/schemas/Token/FlussoTokenSchema";
+import { TokenService } from "@base/api/services/Token/TokenService";
+import { AuthCheck } from "@base/infrastructure/middlewares/Auth/AuthCheck";
+import { User } from "@base/api/models/Users/User";
+import { AuthRequest } from "@base/infrastructure/interfaces/controller.interfaces";
+import { TokenTransactionService } from "@base/api/services/Token/TokenTransactionService";
 
 @Service()
 @OpenAPI({
@@ -14,24 +19,34 @@ export class LoginController extends ControllerBase {
     super();
   }
 
-  @Get("/pending")
-  public async getPendingTokens() {
+  @Inject()
+  private tokenService:TokenService
 
+  @Inject()
+  private tokenTransactionService:TokenTransactionService
+
+  @Get("/pending")
+  @UseBefore(AuthCheck)
+  public async getPendingTokens(@Req() request:AuthRequest ) {
+    return this.tokenService.findPendingTokens(request.loggedUser)
   }
 
   @Post("/report")
-  public async reportToken(@Body() reportBody: ReportTokenBody ) {
-
+  @UseBefore(AuthCheck)
+  public async reportToken( @Req() request:AuthRequest & {body:ReportTokenBody} ) {
+    
   }
 
   @Post("/validate")
-  public async validateToken(@Body() validateBody: ValidateTokenBody ) {
-
+  @UseBefore(AuthCheck)
+  public async validateToken(@Req() request:AuthRequest & {body:ValidateTokenBody} ) {
+    return await this.tokenService.validateToken(request.loggedUser,request.body)
   }
 
   @Post("/send")
-  public async sendToken(@Body() sendTokenBOdy: SendTokenBody ) {
-
+  @UseBefore(AuthCheck)
+  public async sendToken(@Req() request:AuthRequest & {body:SendTokenBody} ) {
+    return await this.tokenTransactionService.createTokenTransaction(request.loggedUser,request.body)
   }
 
 }

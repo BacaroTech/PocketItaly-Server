@@ -2,6 +2,7 @@ import { RepositoryBase } from "@base/infrastructure/abstracts/RepositoryBase";
 import { Service } from "typedi";
 import { AppDataSource } from "@base/config/db";
 import { Token } from "@base/api/models/Tokens/Token";
+import { TransactionStatus } from "@base/api/models/Tokens/TokenTransactionStatus";
 
 @Service()
 export class TokenRepository extends RepositoryBase<Token> {
@@ -27,6 +28,15 @@ export class TokenRepository extends RepositoryBase<Token> {
     });
   }
 
+  public async findPendingTokens(userId:number){
+    return await this.repository.find({where:{
+      tokenTransactions:{
+        status:TransactionStatus.PENDING,
+        toUserId:userId  
+      }
+    }})
+  }
+
   public async findTokenByUserId(userId: number) {
     return await this.repository.find({
       where:{
@@ -35,5 +45,18 @@ export class TokenRepository extends RepositoryBase<Token> {
         }
       }
     });
+  }
+
+  public async findTokenSerialMatch(userId:number, tokenId:number, serialCode:string){
+    return await this.repository.findOneBy({
+      id:tokenId,
+      tokenTransactions:{
+        status:TransactionStatus.PENDING,
+        toUserId:userId
+      },
+      item:{
+        serialCode:serialCode
+      }  
+    })
   }
 }

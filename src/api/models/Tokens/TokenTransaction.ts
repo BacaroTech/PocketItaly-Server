@@ -10,7 +10,7 @@ import {
 import { Token } from "./Token";
 import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
 import { User } from "../Users/User";
-import { TokenTransactionStatus } from "./TokenTransactionStatus";
+import { TokenTransactionStatus, TransactionStatus } from "./TokenTransactionStatus";
 
 @Entity("token_transactions")
 export class TokenTransaction extends EntityBase {
@@ -22,6 +22,9 @@ export class TokenTransaction extends EntityBase {
 
   @Column({ type: "int", nullable: false, name: "to_user" })
   toUserId: number;
+
+  @Column()
+  status:TransactionStatus
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
