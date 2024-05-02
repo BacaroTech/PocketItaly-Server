@@ -1,5 +1,5 @@
 import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
-import { Entity,  Column, CreateDateColumn, UpdateDateColumn, BaseEntity, OneToMany, JoinColumn } from 'typeorm';
+import { Entity,  Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Token } from '../Tokens/Token';
 import { AppFile } from '@base/api/interfaces/AppFileInterface';
 import { Product } from '../Products/Product';
