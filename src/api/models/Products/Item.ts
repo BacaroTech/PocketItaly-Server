@@ -5,7 +5,7 @@ import { Token } from "../Tokens/Token";
 
 
 @Entity({name: 'items'})
-@Unique(['serial_code','join_id'])
+@Unique(['serialCode'])
 export class Item extends EntityBase{
 
     @Column({name: 'serial_code'})
@@ -18,12 +18,8 @@ export class Item extends EntityBase{
     @JoinColumn({name: 'product_id'})
     product: Product
 
-    @Column({name: "join_id" ,type:"varchar"})
-    joinId: string
-
     //column for the link to the token
-    @OneToOne(() => Token)
-    @JoinColumn({name: 'join_id'})
+    @OneToOne(() => Token,token=>token.itemId)
     token: Token
 
     @CreateDateColumn({ name: 'created_at' })

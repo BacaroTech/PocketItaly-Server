@@ -6,6 +6,7 @@ import { TokenTransactionRepository } from "@base/api/repositories/Tokens/TokenT
 import { TokenTransactionStatusRepository } from "@base/api/repositories/Tokens/TokenTransactionStatusRepository";
 import { UserRepository } from "@base/api/repositories/Users/UserRepository";
 import { SendTokenBody } from "@base/api/schemas/Token/FlussoTokenSchema";
+import { LoggedUser } from "@base/infrastructure/interfaces/controller.interfaces";
 import { Inject, Service } from "typedi";
 
 @Service()
@@ -38,7 +39,7 @@ export class TokenTransactionService {
   }
 
 
-  public async createTokenTransaction(user: User, data: SendTokenBody) {
+  public async createTokenTransaction(user: LoggedUser, data: SendTokenBody) {
     const receiverId = await this.userRepository.findOneByEmail(data.email);
 
     if (!receiverId) {
@@ -47,7 +48,7 @@ export class TokenTransactionService {
 
     const tokenTransaction = {
       ...data,
-      fromUserId: user.id,
+      fromUserId: user.userId,
       toUserId: receiverId?.id,
       status: TransactionStatus.PENDING
     };

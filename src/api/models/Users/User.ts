@@ -5,6 +5,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -37,7 +38,7 @@ export class User extends EntityBase {
   @Column({ name: "role_id" })
   roleId: number;
 
-  @OneToOne(() => Role)
+  @ManyToOne(() => Role)
   @JoinColumn({ name: "role_id" })
   role: Role;
 

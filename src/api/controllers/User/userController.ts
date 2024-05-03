@@ -30,7 +30,7 @@ export class UserController extends ControllerBase {
   @Get("/wardrobe")
   @UseBefore(AuthCheck)
   public async getUserWardrobe(@Req() request:AuthRequest){
-    return await this.userService.getUserWardrobe(request.loggedUser.id)
+    return await this.userService.getUserWardrobe(request.loggedUser.userId)
   }
 
 }

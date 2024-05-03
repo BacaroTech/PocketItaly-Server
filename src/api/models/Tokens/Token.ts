@@ -32,8 +32,8 @@ export class Token extends EntityBase {
   @Column({ type: "int", nullable: false, name: "issued_by_user" })
   issuedByUser: number;
 
-  @Column({name: "join_id",type:"varchar"})
-  joinId: string
+  @Column({name: "item_id"})
+  itemId: number
 
   @ManyToOne(() => User, (user) => user.tokens)
   @JoinColumn({ name: "belongs_to" })
@@ -47,7 +47,7 @@ export class Token extends EntityBase {
 
   //column for the link to the token
   @OneToOne(() => Item)
-  @JoinColumn({name: 'join_id'})
+  @JoinColumn({name: 'item_id'})
   item: Item
 
   //    @ManyToOne(() => Company, company => company.tokens)

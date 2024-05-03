@@ -1,5 +1,6 @@
 import {
     IsNotEmpty,
+    IsOptional,
     IsString,
   } from 'class-validator';
   
@@ -18,7 +19,8 @@ import {
     @IsNotEmpty()
     @IsString()
     longitude: string;
-  
+
+    @IsOptional()
     @IsString()
     productBatch: string
 

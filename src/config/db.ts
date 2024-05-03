@@ -24,7 +24,7 @@ export const AppDataSource = new DataSource({
     password: dbConfig.dbPassword,
     database: dbConfig.dbDatabase,
     synchronize: true,
-    logging: true,
+    logging: false,
     entities: [dbConfig.dbEntities],
     // subscribers: [],
     // migrations: [],

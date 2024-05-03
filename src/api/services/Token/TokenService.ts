@@ -7,7 +7,7 @@ import { TokenRepository } from "@base/api/repositories/Tokens/TokenRepository";
 import { TokenTransactionRepository } from "@base/api/repositories/Tokens/TokenTransactionRepository";
 import { TokenTransactionStatusRepository } from "@base/api/repositories/Tokens/TokenTransactionStatusRepository";
 import { ValidateTokenBody } from "@base/api/schemas/Token/FlussoTokenSchema";
-import { randomUUID } from "crypto";
+import { LoggedUser } from "@base/infrastructure/interfaces/controller.interfaces";
 import { Inject, Service } from "typedi";
 
 @Service()
@@ -45,14 +45,14 @@ export class TokenService {
     return await this.tokenRepository.findTokensByUserId(userId);
   }
 
-  public async findPendingTokens(user:User){
-    return this.tokenRepository.findPendingTokens(user.id)
+  public async findPendingTokens(user:LoggedUser){
+    return this.tokenRepository.findPendingTokens(user.userId)
   }
 
-  public async validateToken(user:User,data:ValidateTokenBody ){
-    const token = await this.tokenRepository.findTokenSerialMatch(user.id,data.tokenId,data.serialCode)
+  public async validateToken(user:LoggedUser,data:ValidateTokenBody ){
+    const token = await this.tokenRepository.findTokenSerialMatch(user.userId,data.tokenId,data.serialCode)
     if (token) {
-      await this.passToken(token.belongsTo,user.id,data.tokenId)
+      await this.passToken(token.belongsTo,user.userId,data.tokenId)
       return true
     }  
     return false
@@ -66,10 +66,9 @@ export class TokenService {
     await this.tokenTransactionStatusRepository.insertTokenTransactionStatus({status:TransactionStatus.VERIFIED,transactionId:trx?.id}) 
   }
 
-  public async generateToken(user:User,companyId:number,productId:number,serialCode:string){
-    const joinId = randomUUID()
-    await this.itemRepository.insertItem({serialCode,productId,joinId})
-    await this.tokenRepository.insertToken({belongsTo:user.id,issuedByCompany:companyId,issuedByUser:user.id,joinId})
+  public async generateToken(user:LoggedUser,companyId:number,productId:number,serialCode:string){
+    const item = await this.itemRepository.insertItem({serialCode,productId})
+    await this.tokenRepository.insertToken({belongsTo:user.userId,issuedByCompany:companyId,issuedByUser:user.userId,itemId:item.id})
     return true
   }
 
