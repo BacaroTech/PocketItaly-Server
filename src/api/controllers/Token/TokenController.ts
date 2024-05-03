@@ -1,11 +1,10 @@
-import { Body, Get, JsonController, Middleware, NotFoundError, Param, Post, QueryParam, Req, UseBefore } from "routing-controllers";
+import {  Get, JsonController,  Post, Req, UseBefore } from "routing-controllers";
 import { Inject, Service } from "typedi";
 import { ControllerBase } from "@base/infrastructure/abstracts/ControllerBase";
 import { OpenAPI } from "routing-controllers-openapi";
 import { ReportTokenBody, SendTokenBody, ValidateTokenBody } from "@base/api/schemas/Token/FlussoTokenSchema";
 import { TokenService } from "@base/api/services/Token/TokenService";
 import { AuthCheck } from "@base/infrastructure/middlewares/Auth/AuthCheck";
-import { User } from "@base/api/models/Users/User";
 import { AuthRequest } from "@base/infrastructure/interfaces/controller.interfaces";
 import { TokenTransactionService } from "@base/api/services/Token/TokenTransactionService";
 
@@ -25,6 +24,12 @@ export class LoginController extends ControllerBase {
   @Inject()
   private tokenTransactionService:TokenTransactionService
 
+  
+  @Post("/generate")
+  @UseBefore(AuthCheck)
+  public async generateToken(@Req() request:AuthRequest & {body:ReportTokenBody} ) {
+    return "Report acquired"
+  }
   @Get("/pending")
   @UseBefore(AuthCheck)
   public async getPendingTokens(@Req() request:AuthRequest ) {
@@ -34,7 +39,7 @@ export class LoginController extends ControllerBase {
   @Post("/report")
   @UseBefore(AuthCheck)
   public async reportToken( @Req() request:AuthRequest & {body:ReportTokenBody} ) {
-    
+    return "Report acquired"
   }
 
   @Post("/validate")

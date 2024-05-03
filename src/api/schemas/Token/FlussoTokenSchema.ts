@@ -37,11 +37,9 @@ import {
   export class ReportTokenBody {
 
     @IsNotEmpty()
-    tokenId: number;
+    producerId: number;
 
-    
     @IsNotEmpty()
-    @IsString()
-    report: string;
+    productId:number
 
   }

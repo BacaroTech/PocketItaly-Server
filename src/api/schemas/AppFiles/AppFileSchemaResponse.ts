@@ -10,7 +10,7 @@ import {
   
     @IsNotEmpty()
     @IsString()
-    password: str
+    password: string
     //tutto da fare
   }
   

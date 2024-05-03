@@ -13,11 +13,15 @@ export class TokenTransactionRepository extends RepositoryBase<TokenTransaction>
     return await this.create(data);
   }
 
+  public async findByUserIds(fromUserId:number,toUserId:number){
+    return await this.repository.findOneBy({fromUserId,toUserId})
+  }
+
   public async updateTokenTransaction(
-    id: number,
-    tokenTransaction: TokenTransaction
+    filter: Partial<TokenTransaction>,
+    tokenTransaction: Partial<TokenTransaction>
   ) {
-    return await this.update(id, tokenTransaction);
+    return await this.repository.update(filter as any, tokenTransaction);
   }
 
   public async deleteTokenTransaction(id: number) {
@@ -30,7 +34,7 @@ export class TokenTransactionRepository extends RepositoryBase<TokenTransaction>
     });
   }
 
-  public async findTransactionsByToken (tokenId: number) {
+  public async findTransactionsByTokenId(tokenId: number) {
     return await this.repository.find({
       where:{
         tokenId:tokenId

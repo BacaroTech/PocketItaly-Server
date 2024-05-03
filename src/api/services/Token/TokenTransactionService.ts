@@ -25,7 +25,7 @@ export class TokenTransactionService {
   }
 
   public async updateTokenTransaction(tokenTransaction: TokenTransaction) {
-    return await this.tokenTransactionRepository.updateTokenTransaction(tokenTransaction.id, tokenTransaction);
+    return await this.tokenTransactionRepository.updateTokenTransaction({id:tokenTransaction.id}, tokenTransaction);
       }
 
 

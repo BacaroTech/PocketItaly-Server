@@ -14,8 +14,8 @@ export class TokenRepository extends RepositoryBase<Token> {
     return await this.create(data);
   }
 
-  public async updateToken(id: number, token: Token) {
-    return await this.update(id, token);
+  public async updateToken(id: number, token: Partial<Token>) {
+    return await this.repository.update(id,token)
   }
 
   public async deleteToken(id: number) {
