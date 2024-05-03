@@ -37,12 +37,16 @@ export class TokenRepository extends RepositoryBase<Token> {
     }})
   }
 
-  public async findTokenByUserId(userId: number) {
+  public async findTokensByUserId(userId: number) {
     return await this.repository.find({
       where:{
         user:{
           id:userId
         }
+      },
+      select:{
+        createdAt:true,
+        item:{product:{imgUrl:true,description:true,company:{ragsoc:true}}}
       }
     });
   }

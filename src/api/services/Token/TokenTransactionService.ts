@@ -33,6 +33,10 @@ export class TokenTransactionService {
     return await this.tokenTransactionRepository.deleteTokenTransaction(id);
   }
 
+  public async findTokenTransactionsByTokenId(tokenId:number){
+    return await this.tokenTransactionRepository.findTransactionsByTokenId(tokenId)
+  }
+
 
   public async createTokenTransaction(user: User, data: SendTokenBody) {
     const receiverId = await this.userRepository.findOneByEmail(data.email);

@@ -1,4 +1,4 @@
-import {  Get, JsonController,  Post, Req, UseBefore } from "routing-controllers";
+import {  Body, Get, JsonController,  Param,  Post, Req, UseBefore } from "routing-controllers";
 import { Inject, Service } from "typedi";
 import { ControllerBase } from "@base/infrastructure/abstracts/ControllerBase";
 import { OpenAPI } from "routing-controllers-openapi";
@@ -27,33 +27,40 @@ export class LoginController extends ControllerBase {
   
   @Post("/generate")
   @UseBefore(AuthCheck)
-  public async generateToken(@Req() request:AuthRequest & {body:GenerateTokenBody} ) {
-    const {body:{companyId,productId,serialCode},loggedUser} = request
+  public async generateToken(@Req() request:AuthRequest, @Body() body:GenerateTokenBody ) {
+    const {loggedUser} = request
+    const {companyId,productId,serialCode} = body
     return await this.tokenService.generateToken(loggedUser,companyId,productId,serialCode)
+  }
+
+  @Get("/:tokenId/transactions")
+  @UseBefore(AuthCheck)
+  public async getTokenTransactions(@Req() request:AuthRequest , @Param("tokenId") tokenId:string ) {
+    return await this.tokenTransactionService.findTokenTransactionsByTokenId(parseInt(tokenId))
   }
 
   @Get("/pending")
   @UseBefore(AuthCheck)
   public async getPendingTokens(@Req() request:AuthRequest ) {
-    return this.tokenService.findPendingTokens(request.loggedUser)
+    return await this.tokenService.findPendingTokens(request.loggedUser)
   }
 
   @Post("/report")
   @UseBefore(AuthCheck)
-  public async reportToken( @Req() request:AuthRequest & {body:ReportTokenBody} ) {
+  public async reportToken( @Req() request:AuthRequest ,@Body() body:ReportTokenBody) {
     return "Report acquired"
   }
 
   @Post("/validate")
   @UseBefore(AuthCheck)
-  public async validateToken(@Req() request:AuthRequest & {body:ValidateTokenBody} ) {
-    return await this.tokenService.validateToken(request.loggedUser,request.body)
+  public async validateToken(@Req() request:AuthRequest ,@Body() body:ValidateTokenBody ) {
+    return await this.tokenService.validateToken(request.loggedUser,body)
   }
 
   @Post("/send")
   @UseBefore(AuthCheck)
-  public async sendToken(@Req() request:AuthRequest & {body:SendTokenBody} ) {
-    return await this.tokenTransactionService.createTokenTransaction(request.loggedUser,request.body)
+  public async sendToken(@Req() request:AuthRequest ,@Body() body:SendTokenBody ) {
+    return await this.tokenTransactionService.createTokenTransaction(request.loggedUser,body)
   }
 
 }

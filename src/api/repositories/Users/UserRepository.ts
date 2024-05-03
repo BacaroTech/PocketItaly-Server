@@ -12,7 +12,7 @@ export class UserRepository extends RepositoryBase<User> {
 
   public async createUser(data: object) {
     let entity = new User();
-
+    
     Object.assign(entity, data);
 
     return await this.repository.save(entity);

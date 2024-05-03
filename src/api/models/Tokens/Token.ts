@@ -32,7 +32,7 @@ export class Token extends EntityBase {
   @Column({ type: "int", nullable: false, name: "issued_by_user" })
   issuedByUser: number;
 
-  @Column({name: "join_id"})
+  @Column({name: "join_id",type:"varchar"})
   joinId: string
 
   @ManyToOne(() => User, (user) => user.tokens)

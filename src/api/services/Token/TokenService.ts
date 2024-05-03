@@ -41,8 +41,8 @@ export class TokenService {
     return await this.tokenRepository.findById(id);
   }
 
-  public async findTokenByUserId(user: User) {
-    return await this.tokenRepository.findTokenByUserId(user.id);
+  public async findTokensByUserId(userId: number) {
+    return await this.tokenRepository.findTokensByUserId(userId);
   }
 
   public async findPendingTokens(user:User){
@@ -72,4 +72,9 @@ export class TokenService {
     await this.tokenRepository.insertToken({belongsTo:user.id,issuedByCompany:companyId,issuedByUser:user.id,joinId})
     return true
   }
+
+  public async tokenBelongsTo(userId:number,token:number){
+    return !!await this.tokenRepository.repository.findOne({select:{id:true},where:{belongsTo:userId,id:token}})
+  }
+
 }
