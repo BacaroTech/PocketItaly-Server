@@ -29,6 +29,12 @@ export class Token extends EntityBase {
   @Column({ type: "int", nullable: false, name: "issued_by_company" })
   issuedByCompany: number;
 
+  @Column({ type: "int", nullable: false, name: "issued_by_user" })
+  issuedByUser: number;
+
+  @Column({name: "join_id"})
+  joinId: string
+
   @ManyToOne(() => User, (user) => user.tokens)
   @JoinColumn({ name: "belongs_to" })
   user: User;
@@ -39,8 +45,10 @@ export class Token extends EntityBase {
   @ManyToOne(()=>Company,company=>company.tokens)
   company:Company
 
-  @OneToOne(()=>Item)
-  item:Item
+  //column for the link to the token
+  @OneToOne(() => Item)
+  @JoinColumn({name: 'join_id'})
+  item: Item
 
   //    @ManyToOne(() => Company, company => company.tokens)
   //    @JoinColumn({ name: 'issuedByCompany' })

@@ -2,7 +2,7 @@ import {  Get, JsonController,  Post, Req, UseBefore } from "routing-controllers
 import { Inject, Service } from "typedi";
 import { ControllerBase } from "@base/infrastructure/abstracts/ControllerBase";
 import { OpenAPI } from "routing-controllers-openapi";
-import { ReportTokenBody, SendTokenBody, ValidateTokenBody } from "@base/api/schemas/Token/FlussoTokenSchema";
+import { GenerateTokenBody, ReportTokenBody, SendTokenBody, ValidateTokenBody } from "@base/api/schemas/Token/FlussoTokenSchema";
 import { TokenService } from "@base/api/services/Token/TokenService";
 import { AuthCheck } from "@base/infrastructure/middlewares/Auth/AuthCheck";
 import { AuthRequest } from "@base/infrastructure/interfaces/controller.interfaces";
@@ -27,9 +27,11 @@ export class LoginController extends ControllerBase {
   
   @Post("/generate")
   @UseBefore(AuthCheck)
-  public async generateToken(@Req() request:AuthRequest & {body:ReportTokenBody} ) {
-    return "Report acquired"
+  public async generateToken(@Req() request:AuthRequest & {body:GenerateTokenBody} ) {
+    const {body:{companyId,productId,serialCode},loggedUser} = request
+    return await this.tokenService.generateToken(loggedUser,companyId,productId,serialCode)
   }
+
   @Get("/pending")
   @UseBefore(AuthCheck)
   public async getPendingTokens(@Req() request:AuthRequest ) {

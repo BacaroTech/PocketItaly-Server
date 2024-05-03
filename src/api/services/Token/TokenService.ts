@@ -1,10 +1,13 @@
 import { Token } from "@base/api/models/Tokens/Token";
 import { TransactionStatus } from "@base/api/models/Tokens/TokenTransactionStatus";
 import { User } from "@base/api/models/Users/User";
+import { ItemRepository } from "@base/api/repositories/Products/ItemRepository";
+import { ProductRepository } from "@base/api/repositories/Products/ProductRepository";
 import { TokenRepository } from "@base/api/repositories/Tokens/TokenRepository";
 import { TokenTransactionRepository } from "@base/api/repositories/Tokens/TokenTransactionRepository";
 import { TokenTransactionStatusRepository } from "@base/api/repositories/Tokens/TokenTransactionStatusRepository";
 import { ValidateTokenBody } from "@base/api/schemas/Token/FlussoTokenSchema";
+import { randomUUID } from "crypto";
 import { Inject, Service } from "typedi";
 
 @Service()
@@ -18,6 +21,9 @@ export class TokenService {
 
   @Inject()
   private tokenTransactionStatusRepository: TokenTransactionStatusRepository;
+
+  @Inject()
+  private itemRepository: ItemRepository;
 
   public async insertToken(token: Token) {
     return await this.tokenRepository.insertToken(token);
@@ -60,4 +66,10 @@ export class TokenService {
     await this.tokenTransactionStatusRepository.insertTokenTransactionStatus({status:TransactionStatus.VERIFIED,transactionId:trx?.id}) 
   }
 
+  public async generateToken(user:User,companyId:number,productId:number,serialCode:string){
+    const joinId = randomUUID()
+    await this.itemRepository.insertItem({serialCode,productId,joinId})
+    await this.tokenRepository.insertToken({belongsTo:user.id,issuedByCompany:companyId,issuedByUser:user.id,joinId})
+    return true
+  }
 }

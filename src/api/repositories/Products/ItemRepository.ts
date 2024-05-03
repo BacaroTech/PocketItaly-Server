@@ -13,7 +13,7 @@ export class ItemRepository extends RepositoryBase<Item>{
         return await this.repository.findBy({serialCode})
     }
 
-    public async insertItem(item: Item){
+    public async insertItem(item: Partial<Item>){
         return await this.create(item)
     }
 

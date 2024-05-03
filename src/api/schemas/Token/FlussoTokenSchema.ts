@@ -37,9 +37,23 @@ import {
   export class ReportTokenBody {
 
     @IsNotEmpty()
-    producerId: number;
+    companyId: number;
 
     @IsNotEmpty()
     productId:number
+
+  }
+
+     
+  export class GenerateTokenBody {
+
+    @IsNotEmpty()
+    companyId: number;
+
+    @IsNotEmpty()
+    productId:number
+
+    @IsString()
+    serialCode:string
 
   }

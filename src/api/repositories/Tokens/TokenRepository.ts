@@ -10,7 +10,7 @@ export class TokenRepository extends RepositoryBase<Token> {
     super(AppDataSource.getRepository(Token));
   }
 
-  public async insertToken(data: object) {
+  public async insertToken(data: Partial<Token>) {
     return await this.create(data);
   }
 

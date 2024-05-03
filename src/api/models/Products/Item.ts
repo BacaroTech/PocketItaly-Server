@@ -1,6 +1,8 @@
-import { Column, Entity, JoinColumn, ManyToOne, Unique } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, Unique } from "typeorm";
 import { Product } from "./Product";
 import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
+import { Token } from "../Tokens/Token";
+
 
 @Entity({name: 'items'})
 @Unique(['serialCode'])
@@ -16,11 +18,11 @@ export class Item extends EntityBase{
     @JoinColumn({name: 'product_id'})
     product: Product
 
-    //@Column({name: token_id})
-    //tokenId: string
+    @Column({name: "join_id"})
+    joinId: string
 
     //column for the link to the token
-    //@OneToOne(() => Token)
-    //@JoinColumn({name: 'token_id'})
-    //token: Token
+    @OneToOne(() => Token)
+    @JoinColumn({name: 'join_id'})
+    token: Token
 }
