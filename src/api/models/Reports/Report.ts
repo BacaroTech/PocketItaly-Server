@@ -1,10 +1,15 @@
 import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne } from "typeorm";
 import { User } from "../Users/User";
 
-export enum Type{
+export enum Status{
     POSITIVE = 'Positive',
     NEGATIVE = 'Negative'
+}
+
+export enum Type{
+    ONLINE = 'Online',
+    FISICA = 'Fisica'
 }
 
 @Entity({name: 'reports'})
@@ -19,8 +24,11 @@ export class Report extends EntityBase{
     @Column()
     comune: string
     
+    @CreateDateColumn({name: 'created_at'})
+    createdAt: Date
+
     @Column()
-    date: Date
+    status: Status
 
     @Column()
     type: Type

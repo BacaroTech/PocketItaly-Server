@@ -12,20 +12,22 @@ docker compose -f docker-compose.yml up -d
 ```
 
 ## Avvio Server
-Windows
+### Windows
 ```
 npm run start
 ```
-MacOS/Linux
+### MacOS/Linux
 ```
 npm run start-unix
 ```
 
-## Popolazione DB
-Per popolare le tabelle di Products e Items si utilizzano delle collection esportate da Postman.
-Importare quindi nel client le Collection presenti nella cartella collections_db e runnarle (prima quella prima la Product e poi la Item).
-Se tutto è andato a buon fine, ci ritroveremo con questi dati nelle tabelle (visibili all'indirizzo http://localhost:5050, loggandosi al server di PgAdmin tramite le credenziali presenti nel file .env):
-1) Products: 
-- 1	"test"	"12345678901"	"Example Product 1"	"0123456789"	"This is an example product description."	"https://example.com/product_image.jpg"	"2024-04-25 14:00:00"
-2) Items: 
-- 2	"test"	1
+## Migliorie
+### Segnalazioni
+
+Nel lato applicativo di gestione delle segnalazioni, l'obiettivo principale è fornire un'interfaccia intuitiva per la visualizzazione e la gestione delle segnalazioni georeferenziate. Inizialmente, è stata considerata l'opzione di utilizzare la libreria Leaflet per la gestione delle mappe interattive. Tuttavia, a causa delle restrizioni temporali nel processo di sviluppo, è stata scelta un'alternativa più rapida.
+
+È stato implementato un endpoint semplice che richiede le coordinate geografiche (latitudine e longitudine) insieme a una distanza per definire un'area di interesse sulla mappa. Questo approccio consente agli utenti di visualizzare solo le segnalazioni pertinenti rispetto alla loro posizione o a un'area specifica.
+
+Inizialmente, era stato pianificato di utilizzare il formato GeoJSON per rappresentare graficamente le segnalazioni sulla mappa. Tuttavia, a causa delle restrizioni temporali nel processo di sviluppo, è stata rinviata l'implementazione completa di GeoJSON insieme a Leaflet per una futura iterazione del progetto. Al momento, il sistema fornisce solo un'interfaccia di base tramite un endpoint semplice per la visualizzazione delle segnalazioni. La gestione completa dei GeoJSON rimane una prospettiva interessante per il miglioramento futuro del progetto.
+
+Questo approccio pragmatico consente di realizzare una soluzione funzionale per la gestione delle segnalazioni, nonostante le restrizioni di tempo, concentrandosi sull'essenziale e lasciando spazio per future espansioni e miglioramenti.

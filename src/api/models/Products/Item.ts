@@ -9,6 +9,9 @@ export class Item extends EntityBase{
     @Column({name: 'serial_code'})
     serialCode: string
 
+    @Column({name: 'n_lotto'})
+    nLotto: number
+
     @ManyToOne(() => Product, { onDelete: 'CASCADE' })
     @JoinColumn({name: 'product_id'})
     product: Product

@@ -1,22 +1,19 @@
 import {
     Column,
+    CreateDateColumn,
     Entity,
-    OneToMany,
-    PrimaryGeneratedColumn,
+    JoinColumn,
+    ManyToOne,
+    OneToMany
 } from 'typeorm';
   
 
 import { EntityBase } from "@base/infrastructure/abstracts/EntityBase";
 import { Item } from './Item';
+import { Company } from '../Companies/Company';
 
 @Entity({ name: 'products' })
 export class Product extends EntityBase {
-    @Column({name: 'producer_id'})
-    producerId: string
-
-    @Column({name: 'piva_company'})
-    pivaCompany: string
-
     @Column()
     name: string
 
@@ -29,8 +26,12 @@ export class Product extends EntityBase {
     @Column({name: 'img_url'})
     imgUrl: string
 
-    @Column({name: 'created_at'})
-    createAt: Date
+    @CreateDateColumn({name: 'created_at'})
+    createdAt: Date
+
+    @ManyToOne(() => Company, { onDelete: 'CASCADE' })
+    @JoinColumn({name: 'company_id'})
+    company: Company
 
     @OneToMany(() => Item, (item) => item.product)
     items: Item[]

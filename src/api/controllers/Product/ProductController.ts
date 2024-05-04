@@ -1,7 +1,7 @@
 import { Product } from "@base/api/models/Products/Product";
 import { ProductService } from "@base/api/services/Product/ProductService";
 import { Body, Delete, Get, JsonController, Param, Post, Put } from "routing-controllers";
-import { OpenAPI } from "routing-controllers-openapi";
+import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Inject, Service } from "typedi";
 
 @Service()
